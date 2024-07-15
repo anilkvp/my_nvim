@@ -180,6 +180,13 @@ vim.keymap.set("n", "[t", function()
 	require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
 
--- Terminal
-map("n", "<C->", "<cmd>ToggleTerm<cr>")
---map("i", "<C->", "<esc><cmd>ToggleTerm<cr>")
+--Doge
+--map("n", "<Leader>d", "<Plug>(doge-generate)")
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap("n", "<Leader>cn", ":lua require('neogen').generate()<CR>", opts)
+
+-- Telescope
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
