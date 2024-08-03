@@ -56,8 +56,39 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["rust-analyzer"] = function()
-				nvim_lsp["rust-analyzer"].setup({
+			["rust_analyzer"] = function()
+				nvim_lsp["rust_analyzer"].setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end,
+			["jdtls"] = function()
+				nvim_lsp["jdtls"].setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end,
+			["helm_ls"] = function()
+				nvim_lsp["helm_ls"].setup({
+					settings = {
+						["helm-ls"] = {
+							yamlls = {
+								path = "yaml-language-server",
+							},
+						},
+					},
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end,
+			["dockerls"] = function()
+				nvim_lsp["dockerls"].setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end,
+			["zls"] = function()
+				nvim_lsp["zls"].setup({
 					on_attach = on_attach,
 					capabilities = capabilities,
 				})
