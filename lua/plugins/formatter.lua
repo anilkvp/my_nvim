@@ -16,7 +16,7 @@ return {
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				python = { "mypy", "isort", "black" },
 				rust = { "rustfmt" },
 				java = { "google-java-format" },
 			},
@@ -27,7 +27,7 @@ return {
 			},
 		})
 
-		vim.keymap.set({ "n", "v" }, "<leader>f", function()
+		vim.keymap.set({ "n", "v" }, "<leader>cf", function()
 			conform.format({
 				lsp_fallback = true,
 				async = false,

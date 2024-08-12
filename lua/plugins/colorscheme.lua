@@ -8,14 +8,27 @@ return {
 		end,
 	},
 	{
+		"catppuccin/nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme("catppuccin")
+		end,
+	},
+	{
+		"navarasu/onedark.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme("onedark")
+			style = "deep"
+		end,
+	},
+	{
 		"nyoom-engineering/oxocarbon.nvim",
-		-- Add in any other configuration;
-		--   event = foo,
-		--   config = bar
-		--   end,
-		-- config = function()
-		-- 	-- load the colorscheme here
-		-- 	vim.cmd([[colorscheme oxocarbon]])
-		-- end,
+		lazy = false,
+		config = function()
+			vim.cmd.colorscheme("oxocarbon")
+		end,
 	},
 }
