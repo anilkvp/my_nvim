@@ -218,7 +218,7 @@ map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", {desc="Show type de
 map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", {desc="Diagnostics (Trouble)"})
 map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", {desc="Buffer Diagnostics (Trouble)"})
 map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", {desc="Symbols (Trouble)"})
-map("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {desc=""})
+map("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", {desc="Toggle focus=false (Trouble)"})
 map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", {desc="Location List (Trouble)	"})
 map("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", {desc="Quickfix List (Trouble)	"})
 
@@ -228,3 +228,7 @@ map("n", "<leader>st", "<cmd>TodoQuickFix<cr>", {desc="Todo"})
 map("n", "<leader>sT", "<cmd>TodoLocList<cr>", {desc="Todo/Fix/Fixme"})
 map("n", "<leader>xt", "<cmd>TodoTrouble<cr>", {desc="Todo (Trouble)"})
 map("n", "<leader>sq", "<cmd>TodoTelescope<cr>", {desc="Todo (Telescope)"})
+
+
+local opts = { desc="Generate documentation", noremap = true, silent = true }
+map("n", "<Leader>cn", ":lua require('neogen').generate()<CR>", opts)
