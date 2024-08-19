@@ -13,11 +13,20 @@ return {
 		require("neo-tree").setup({
 			close_if_last_window = false,
 			enable_git_status = true,
+			enable_diagnostics = true,
 			default_component_configs = {
+				container = {
+					enable_character_fade = true,
+				},
 				indent = {
 					with_markers = true,
 					indent_marker = "¦",
 					last_indent_marker = "└",
+					highlight = "NeoTreeIndentMarker",
+					with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
+					expander_collapsed = "",
+					expander_expanded = "",
+					expander_highlight = "NeoTreeExpander",
 				},
 				icon = {
 					folder_closed = "",
@@ -25,11 +34,11 @@ return {
 					folder_empty = "■",
 					-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
 					-- then these will never be used.
-					default = "",
+					default = "*",
 					highlight = "NeoTreeFileIcon",
 				},
 				modified = {
-					symbol = "",
+					symbol = "[+]",
 					highlight = "NeoTreeModified",
 				},
 				name = {
