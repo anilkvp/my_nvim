@@ -12,7 +12,7 @@ return {
 			ensure_installed = {
 				"html",
 				"jsonls",
-				"tsserver",
+				"ts_ls",
 				"pyright",
 				"rust_analyzer",
 				"jdtls",
