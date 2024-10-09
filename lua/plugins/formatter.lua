@@ -16,7 +16,7 @@ return {
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 				lua = { "stylua" },
-				python = { "mypy", "isort", "black" },
+				python = { "isort", "black" },
 				rust = { "rustfmt" },
 				java = { "google-java-format" },
 			},

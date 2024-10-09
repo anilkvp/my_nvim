@@ -29,7 +29,7 @@ return {
 				"isort", -- python formatter
 				"black", -- python formatter
 				"pylint",
-				"mypy",
+				-- "mypy",
 				"google-java-format",
 			},
 		})
