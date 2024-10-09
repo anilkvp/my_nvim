@@ -11,7 +11,6 @@ return {
 			automatic_installation = true,
 			ensure_installed = {
 				"html",
-				"jsonls",
 				"ts_ls",
 				"pyright",
 				"rust_analyzer",
@@ -19,7 +18,7 @@ return {
 				"yamlls",
 				"helm_ls",
 				"dockerls",
-				"zls",
+				-- "zls",
 			},
 		})
 
