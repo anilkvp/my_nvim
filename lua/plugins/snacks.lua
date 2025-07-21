@@ -4,24 +4,56 @@ return {
 	lazy = false,
 	---@type snacks.Config
 	opts = {
-		animate = { enabled = true },
-		bigfile = { enabled = true },
-		dashboard = { enabled = true },
-		indent = { enabled = true },
-		input = { enabled = true },
 		notifier = {
 			enabled = true,
 			timeout = 3000,
 		},
-		quickfile = { enabled = true },
-		scroll = { enabled = true },
-		statuscolumn = { enabled = true },
-		words = { enabled = true },
-		styles = {
-			notification = {
-				-- wo = { wrap = true } -- Wrap notifications
-			},
+
+		-- Status line (replaces lualine.nvim)
+		statusline = {
+			enabled = false,
 		},
+
+		-- Indent guides (replaces indent-blankline.nvim)
+		indent = {
+			enabled = true,
+			char = "│",
+		},
+
+		-- Smooth scrolling (replaces neoscroll.nvim)
+		scroll = {
+			enabled = true,
+		},
+
+		-- Word highlighting (replaces vim-illuminate)
+		words = {
+			enabled = true,
+		},
+
+		-- Dashboard/Starter screen (replaces alpha.nvim)
+		dashboard = {
+			enabled = true,
+		},
+
+		-- Buffer management
+		bufdelete = {
+			enabled = true,
+		},
+
+		-- Quick file operations
+		quickfile = {
+			enabled = true,
+		},
+
+		-- Git integration
+		git = {
+			enabled = true,
+		},
+
+		-- Disable problematic modules
+		scope = { enabled = false },
+		picker = { enabled = false },
+		input = { enabled = false },
 		terminal = {
 			win = {
 				position = "float",

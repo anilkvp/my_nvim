@@ -5,6 +5,11 @@ vim.g.maplocalleader = "\\"
 -- LazyVim auto format
 vim.g.autoformat = true
 
+vim.cmd("filetype plugin indent on")
+vim.cmd("syntax enable")
+vim.cmd("set number")
+vim.cmd("set ruler")
+vim.cmd("set relativenumber")
 -- LazyVim picker to use.
 -- Can be one of: telescope, fzf
 -- Leave it to "auto" to automatically use the picker

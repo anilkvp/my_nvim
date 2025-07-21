@@ -1,36 +1,58 @@
 return {
-	"williamboman/mason.nvim",
-	dependencies = {
-		"williamboman/mason-lspconfig.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-	},
-	config = function()
-		require("mason").setup()
-
-		require("mason-lspconfig").setup({
-			automatic_installation = true,
+	-- Mason: LSP/DAP/linter/formatter installer
+	{
+		"williamboman/mason.nvim",
+		cmd = "Mason",
+		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+		build = ":MasonUpdate",
+		opts = {
 			ensure_installed = {
-				"html",
-				"ts_ls",
+				-- LSP servers
+				"lua-language-server",
+				--	"typescript-language-server",
 				"pyright",
-				"rust_analyzer",
-				"jdtls",
-				"yamlls",
-				"helm_ls",
-				"dockerls",
-				-- "zls",
-			},
-		})
-
-		require("mason-tool-installer").setup({
-			ensure_installed = {
+				"rust-analyzer",
+				-- "gopls",
+				"clangd",
+				-- "tailwindcss-language-server",
+				"html-lsp",
+				-- "css-lsp",
+				"json-lsp",
+				-- Formatters
+				"stylua",
 				"prettier",
-				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"black", -- python formatter
-				"pylint",
-				"google-java-format",
+				"black",
+				"isort",
+				-- Linters
+				"eslint_d",
+				-- "flake8",
 			},
-		})
-	end,
+		},
+		config = function(_, opts)
+			require("mason").setup(opts)
+			local mr = require("mason-registry")
+			local function ensure_installed()
+				for _, tool in ipairs(opts.ensure_installed) do
+					local p = mr.get_package(tool)
+					if not p:is_installed() then
+						p:install()
+					end
+				end
+			end
+			if mr.refresh then
+				mr.refresh(ensure_installed)
+			else
+				ensure_installed()
+			end
+		end,
+	},
+
+	-- Mason LSP Config Bridge
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "mason.nvim" },
+		opts = {
+			automatic_installation = true,
+		},
+	},
 }
