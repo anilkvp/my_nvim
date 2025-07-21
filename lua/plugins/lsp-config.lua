@@ -1,94 +1,74 @@
 return {
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"hrsh7th/cmp-nvim-lsp",
-		},
-		config = function()
-			local lspconfig = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+	"neovim/nvim-lspconfig",
+	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"hrsh7th/cmp-nvim-lsp",
+		{ "folke/neodev.nvim", opts = {} },
+	},
+	config = function()
+		local nvim_lsp = require("lspconfig")
+		local mason_lspconfig = require("mason-lspconfig")
 
-			-- LSP settings
-			local on_attach = function(client, bufnr)
-				local opts = { noremap = true, silent = true, buffer = bufnr }
+		local protocol = require("vim.lsp.protocol")
 
-				-- Key mappings
-				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-				vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-				vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-				vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-				vim.keymap.set("n", "<leader>wl", function()
-					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-				end, opts)
-				vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
-				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-				vim.keymap.set("n", "<leader>f", function()
-					vim.lsp.buf.format({ async = true })
-				end, opts)
+		local on_attach = function(client, bufnr)
+			-- format on save
+			if client.server_capabilities.documentFormattingProvider then
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					group = vim.api.nvim_create_augroup("Format", { clear = true }),
+					buffer = bufnr,
+					callback = function()
+						vim.lsp.buf.format()
+					end,
+				})
 			end
+		end
 
-			-- Configure LSP servers
-			local servers = {
-				lua_ls = {
+		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+		mason_lspconfig.setup_handlers({
+			function(server)
+				nvim_lsp[server].setup({
+					capabilities = capabilities,
+				})
+			end,
+			["ts_ls"] = function()
+				nvim_lsp["ts_ls"].setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end,
+			["html"] = function()
+				nvim_lsp["html"].setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end,
+			["pyright"] = function()
+				nvim_lsp["pyright"].setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end,
+			["rust_analyzer"] = function()
+				nvim_lsp["rust_analyzer"].setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end,
+			["helm_ls"] = function()
+				nvim_lsp["helm_ls"].setup({
 					settings = {
-						Lua = {
-							runtime = { version = "LuaJIT" },
-							diagnostics = { globals = { "vim" } },
-							workspace = {
-								library = vim.api.nvim_get_runtime_file("", true),
-								checkThirdParty = false,
+						["helm-ls"] = {
+							yamlls = {
+								path = "yaml-language-server",
 							},
-							telemetry = { enable = false },
 						},
 					},
-				},
-				tsserver = {},
-				pyright = {},
-				rust_analyzer = {},
-				gopls = {},
-				clangd = {},
-				tailwindcss = {},
-				html = {},
-				cssls = {},
-				jsonls = {},
-			}
-
-			for server, config in pairs(servers) do
-				lspconfig[server].setup(vim.tbl_deep_extend("force", {
-					capabilities = capabilities,
 					on_attach = on_attach,
-				}, config))
-			end
-
-			-- Diagnostic configuration
-			vim.diagnostic.config({
-				virtual_text = true,
-				signs = true,
-				underline = true,
-				update_in_insert = false,
-				severity_sort = true,
-				float = {
-					border = "rounded",
-					source = "always",
-					header = "",
-					prefix = "",
-				},
-			})
-
-			-- Diagnostic signs
-			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-			end
-		end,
-	},
+					capabilities = capabilities,
+				})
+			end,
+		})
+	end,
 }
