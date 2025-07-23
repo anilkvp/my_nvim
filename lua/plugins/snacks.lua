@@ -33,6 +33,25 @@ return {
 				-- wo = { wrap = true } -- Wrap notifications
 			},
 		},
+		terminal = {
+			win = {
+				position = "float",
+				border = "rounded",
+				cursorcolumn = false,
+				cursorline = false,
+				cursorlineopt = "both",
+				colorcolumn = "",
+				list = false,
+				number = false,
+				relativenumber = false,
+				signcolumn = "no",
+				spell = false,
+				winbar = "",
+				statuscolumn = "",
+				wrap = false,
+				sidescrolloff = 0,
+			},
+		},
 	},
 	keys = {
 		-- Top Pickers & Explorer
@@ -478,6 +497,7 @@ return {
 				Snacks.terminal()
 			end,
 			desc = "Toggle Terminal",
+			mode = { "n", "t" },
 		},
 		{
 			"<c-_>",
@@ -485,6 +505,7 @@ return {
 				Snacks.terminal()
 			end,
 			desc = "which_key_ignore",
+			mode = { "n", "t" },
 		},
 		{
 			"]]",
