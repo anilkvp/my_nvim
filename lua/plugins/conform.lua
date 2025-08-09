@@ -19,7 +19,7 @@ return {
 				python = { "isort", "black" },
 				--python = { "isort" },
 				rust = { "rustfmt" },
-				java = { "google-java-format" },
+				-- java = { "google-java-format" },
 			},
 			formatters = {
 				isort = {
@@ -45,4 +45,3 @@ return {
 		end, { desc = "Format file or range (in visual mode)" })
 	end,
 }
-

@@ -16,6 +16,9 @@ return {
 		},
 		picker = {
 			sources = {
+				files = {
+					hidden = true,
+				},
 				explorer = {
 					layout = {
 						auto_hide = { "input" },
