@@ -6,8 +6,8 @@
 -- See: https://neovim.io/doc/user/vim_diff.html
 -- [2] Defaults - *nvim-defaults*
 
-local g = vim.g       -- Global variables
-local opt = vim.opt   -- Set options (global/buffer/windows-scoped)
+local g = vim.g -- Global variables
+local opt = vim.opt -- Set options (global/buffer/windows-scoped)
 
 opt.autowrite = true -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
@@ -91,3 +91,20 @@ end
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
+-- Fix spelling for some languages
+vim.diagnostic.config({
+	virtual_text = {
+		prefix = "", -- Could be '●', '▎', 'x'
+		spacing = 4,
+	},
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+	},
+})
